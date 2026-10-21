@@ -71,6 +71,8 @@ int Core::onLoop(){
     window->poll();
     window->clear();
 
+    keyboard->update();
+
     Router::GetInstance()->getCurrentScene()->onLoop();
 
     if(keyboard->getPressed(GLFW_KEY_ESCAPE)){

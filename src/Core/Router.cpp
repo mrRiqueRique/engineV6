@@ -10,7 +10,8 @@ Router* Router::GetInstance(std::unordered_map<std::string, Scene*> scenes)
     return router;
 }
 
-void Router::Destroy(){
+void Router::Destroy()
+{
     for (const auto& [name, scene] : router->scenes)
         delete scene;
 
@@ -18,4 +19,13 @@ void Router::Destroy(){
 
     delete router;
     router = nullptr;
+}
+
+void Router::setCurrentScene(std::string newScene)
+{
+    if(currentScene)
+        currentScene->onEnd();
+    
+    currentScene = scenes[newScene];
+    currentScene->onStart();
 }

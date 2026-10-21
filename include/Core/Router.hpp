@@ -19,7 +19,7 @@ class Router{
         
         static Router* GetInstance(std::unordered_map<std::string, Scene*> scenes = {});
         
-        void setCurrentScene(std::string newScene) { currentScene = scenes[newScene]; }
+        void setCurrentScene(std::string newScene);
         
         Scene* getCurrentScene() const { return currentScene; } 
         
