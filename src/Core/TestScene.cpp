@@ -36,8 +36,6 @@ void TestScene::onLoop()
     if(keyboard->getPressed(GLFW_KEY_K))
         test->translate(glm::vec3(0.5, -0.0, 0.0));
 
-    test->printInformation();
-
     renderer->draw();
 }
 
