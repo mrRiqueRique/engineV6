@@ -3,7 +3,7 @@
 #include <Core/Scene.hpp>
 #include <Resources/ResourceManager.hpp>
 #include <Graphics/Camera/KeyboardCamera.hpp>
-
+#include <Graphics/Primitives/Rectangle.hpp>
 class TestScene : public Scene{
     public:
         TestScene(const Cursor* cursor, const Keyboard* keyboard, const Window* window);

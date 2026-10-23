@@ -6,10 +6,16 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     manager = new ResourceManager();
     manager->loadMeshes("assets/models/");
     manager->loadShaders("assets/shaders/");
+    manager->loadMesh(new Rectangle("rect", glm::vec2(1.0, 1.0)));
+    manager->printLoaded();
     renderer = new Renderer(new KeyboardCamera(0.5f, 2.0f, keyboard), manager->getShader("zTextured"));
 
     test = new Object("teste");
-    test->addMeshes(manager->getMesh("acklay"));
+    test->addMesh(manager->getMesh("acklay_0"));
+    test->addMesh(manager->getMesh("hangar_0"));
+    test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
+    test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
+    test->addMesh(manager->getMesh("imerpialcomputerpack1_10"));
     renderer->addObject(test);
 }
 
