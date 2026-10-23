@@ -4,12 +4,12 @@
 
 class Object{
     public:
-        Object(const std::string& ID, glm::vec3 origin = glm::vec3(0.0), glm::mat4 model = glm::mat4(1.0));
+        Object(const std::string& ID, glm::vec3 origin = glm::vec3(0.0), glm::mat4 model = glm::mat4(1.0), std::map<std::string, Mesh*> meshes = {});
         ~Object();
 
         void draw(const Shader& shader) const;
 
-        void addMesh(const Mesh* newMesh);
+        void addMesh(Mesh* newMesh);
         void addMeshes(const std::vector<Mesh*>& newMeshes);
         void removeMesh(const std::string& meshKey);
 
@@ -31,5 +31,5 @@ class Object{
         glm::vec3 origin;
         glm::mat4 model;
         
-        std::map<std::string, const Mesh*> meshes;
+        std::map<std::string, Mesh*> meshes;
 };

@@ -48,6 +48,27 @@ Mesh* ResourceManager::getMesh(const std::string& ID){
     return it->second;
 }
 
+std::map<std::string, Mesh*> ResourceManager::getMeshes(const std::string& ID){
+    std::map<std::string, Mesh*> allMeshes;
+    bool equal = true;
+    for(const auto& [key, mesh] : meshes){
+        for(int i = 0; i < ID.size(); i++){
+            if(key[i] != ID[i]){
+                equal = false;
+                break;
+            }
+        }
+        if(equal)
+            allMeshes[mesh->getID()] = mesh;
+        
+        equal = true;
+    }
+    if(!allMeshes.size())
+        throw std::runtime_error("No meshes with ID = " + ID);
+    
+    return allMeshes;
+}
+
 void ResourceManager::removeMesh(const std::string& ID){
     auto it = meshes.find(ID);
 
@@ -143,11 +164,7 @@ void ResourceManager::printLoaded()
 {
     std::cout << "MESHES:" << std::endl;
     for(const auto& [key, mesh] : meshes){
-        std::cout << "MESH: " << key << std::endl;
-        
-        std::cout << mesh->getID() << std::endl;
-        
-        std::cout << "=======================" << std::endl;
+        std::cout << "MESH: " << key << std::endl;        
     }
     std::cout << "=======================" << std::endl;
     std::cout << "TEXTURES" << std::endl;

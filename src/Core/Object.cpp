@@ -1,8 +1,8 @@
 #include <Core/Object.hpp>
 
 
-Object::Object(const std::string& ID, glm::vec3 origin, glm::mat4 model)
-    : ID(ID), origin(origin), model(model)
+Object::Object(const std::string& ID, glm::vec3 origin, glm::mat4 model, std::map<std::string, Mesh*> meshes)
+    : ID(ID), origin(origin), model(model), meshes(meshes)
 {
 
 }
@@ -20,7 +20,7 @@ void Object::draw(const Shader& shader) const
     }
 }
 
-void Object::addMesh(const Mesh* newMesh)
+void Object::addMesh(Mesh* newMesh)
 {
     if(!meshes.count(newMesh->getID())){
         meshes[newMesh->getID()] = newMesh;

@@ -3,7 +3,7 @@
 KeyboardCamera::KeyboardCamera(float tVel, float rVel, const Keyboard* keyboard)
     : translationVelocity(tVel), rotationVelocity(rVel), keyboard(keyboard)
 {
-    view = new View("simple", glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 45.0f, 16.0f/9.0f, 0.1f, 100.0f);
+    view = new View("simple", glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), 45.0f, 16.0f/9.0f, 0.1f, 1000.0f);
 }
 
 KeyboardCamera::~KeyboardCamera()
