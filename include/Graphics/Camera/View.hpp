@@ -14,11 +14,13 @@ class View{
         glm::vec3 getTarget() const { return target; }
         glm::vec3 getUp() const { return up; }
         
-        glm::vec3 getForward() const { return glm::normalize(this->target - this->position); }
-        glm::vec3 getRight() const { return glm::normalize(glm::cross(this->getForward(), this->up)); }
+        glm::vec3 getForward() const { return glm::normalize(target - position); }
+        glm::vec3 getRight() const { return glm::normalize(glm::cross(getForward(), up)); }
 
         glm::mat4 getView() const { return viewMatrix; }
         glm::mat4 getProjection() const { return projectionMatrix; }
+
+        float getZFar() const { return zFar; }
 
         void informShader(const Shader& shader) const;
 
@@ -31,6 +33,8 @@ class View{
         void rotateDirection(glm::vec3 rotationVel);
 
         std::string getID() { return ID; };
+
+        void print_info() const;
 
     private:
         std::string ID;

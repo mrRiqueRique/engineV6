@@ -6,7 +6,7 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     manager = new ResourceManager();
     manager->loadMeshes("assets/models/");
     manager->loadShaders("assets/shaders/");
-    renderer = new Renderer(new KeyboardCamera(0.5f, 2.0f, keyboard), manager->getShader("normalTextured"));
+    renderer = new Renderer(new KeyboardCamera(0.5f, 2.0f, keyboard), manager->getShader("zTextured"));
 
     test = new Object("teste");
     test->addMeshes(manager->getMesh("acklay"));

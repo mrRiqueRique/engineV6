@@ -6,3 +6,4 @@ target_sources(engine PRIVATE
 )
 
 add_subdirectory(Camera)
+add_subdirectory(Primitives)

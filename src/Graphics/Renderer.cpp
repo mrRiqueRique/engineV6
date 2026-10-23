@@ -17,6 +17,8 @@ void Renderer::draw()
 
     shader->activate();
     camera->informShader(*shader);
+    shader->informVec3("cameraPosition", camera->getView()->getPosition());
+    shader->informFloat("zFar", camera->getView()->getZFar());
     for(const auto& [key, object] : objects)
         object->draw(*shader);
 }

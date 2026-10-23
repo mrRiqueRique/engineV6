@@ -46,3 +46,12 @@ void View::rotateDirection(glm::vec3 rotationVel){
 
     calculateView(position, target, up);
 }
+
+void View::print_info() const{
+    std::cout<<"Info from: "<<ID<<std::endl;
+    std::cout<<"Position: "<<" x:"<<position.x<<" y:"<<position.y<<" z:"<<position.z<<std::endl;
+    std::cout<<"Rotation: "<<" x:"<<rotation.x<<" y:"<<rotation.y<<" z:"<<rotation.z<<std::endl;
+    std::cout<<"Target: "<<" x:"<<target.x<<" y:"<<target.y<<" z:"<<target.z<<std::endl;
+    std::cout<<"Up: "<<" x:"<<up.x<<" y:"<<up.y<<" z:"<<up.z<<std::endl;
+    std::cout<<"---------------------------------"<<std::endl;
+}
