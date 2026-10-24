@@ -17,6 +17,10 @@ float modSphereSDF(vec3 p, vec3 c, float radius){
     return length(mod(p - c + 0.5, 1.0) - 0.5) - radius;
 }
 
+float sphereSDF(vec3 p, vec3 c, float radius){
+    return length(p - c) - radius;
+}
+
 struct Ray{
     vec3 direction;
     vec3 position;
@@ -37,7 +41,7 @@ void main() {
     float dist;
 
     for(int i = 0; i < MAX_STEPS; i++){
-        dist = modSphereSDF(ray.position, SPHERE_CENTER, SPHERE_RADIUS);
+        dist = sphereSDF(ray.position, SPHERE_CENTER, SPHERE_RADIUS);
         if(dist < PRECISION){
             steps = i;
             intersected = true;

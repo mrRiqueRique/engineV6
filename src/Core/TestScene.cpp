@@ -7,13 +7,14 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     manager->loadMeshes("assets/models/");
     manager->loadShaders("assets/shaders/");
     manager->loadMesh(new Rectangle("rect", glm::vec2(1.0, 1.0)));
+    manager->loadMesh(new Box("box", glm::vec3(1.0, 1.0, 1.0)));
 
     camera = new KeyboardCamera(0.1f, 2.0f, keyboard);
     renderer = new RendererRasterizer(manager->getShader("normalColored"), manager->getShader("zColored"));
         
     test = new Object("teste", glm::vec3(0.0), glm::mat4(1.0), manager->getMeshes("acklay"));
     
-    // test->addMesh(manager->getMesh("rect_mesh"));
+    test->addMesh(manager->getMesh("box"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_10"));

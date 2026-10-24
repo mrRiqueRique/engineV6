@@ -5,6 +5,7 @@
 #include <Graphics/Camera/KeyboardCamera.hpp>
 #include <Graphics/RendererRM.hpp>
 #include <Graphics/Blender.hpp>
+#include <Graphics/Primitives/Box.hpp>
 
 class TestScene : public Scene{
     public:
