@@ -12,7 +12,7 @@ Core::Core(){
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
     windowParams wParams = {
-        .fullscreen = GLFW_FALSE,
+        .fullscreen = GLFW_TRUE,
         .width = 1400,
         .height = 788,
         .windowName = "Test"

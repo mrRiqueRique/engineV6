@@ -15,5 +15,6 @@ class FrameBuffer{
 
     private:
         GLuint ID;
+        GLuint depthRBO;
         Texture* shaderOutput;
 };

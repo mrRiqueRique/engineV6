@@ -13,7 +13,7 @@ class Texture{
         std::string getName() const { return name; };
         GLuint getID() const { return ID; }
 
-        void bindAt(const Shader& shader, unsigned int unit);
+        void bindAt(const Shader& shader, const std::string& loc, unsigned int unit);
         void copyPixelData(const Texture& texture);
 
         int getWidth() const { return width; }

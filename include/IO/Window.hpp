@@ -21,8 +21,8 @@ class Window{
         bool shouldClose() { return glfwWindowShouldClose(handle); }
         void makeCurrent() { glfwMakeContextCurrent(handle); }
 
-        double getWidth(){ return width; }
-        double getHeight(){ return height; }
+        double getWidth() const { return width; }
+        double getHeight() const { return height; }
 
         GLFWwindow* getHandle(){ return handle; }
     private:

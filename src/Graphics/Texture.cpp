@@ -44,9 +44,9 @@ Texture::Texture(int width, int height, const std::string& name)
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
@@ -62,11 +62,11 @@ Texture::Texture(int width, int height, const std::string& name)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture::bindAt(const Shader& shader, unsigned int unit)
+void Texture::bindAt(const Shader& shader, const std::string& loc, unsigned int unit)
 {
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, ID);
-    shader.informInt("Texture", 0);
+    shader.informInt(loc.c_str(), unit);
 }
 
 void Texture::copyPixelData(const Texture& texture)

@@ -1,9 +1,10 @@
 #pragma once
-#include <Graphics/Renderer.hpp>
+#include <Graphics/RendererRasterizer.hpp>
 #include <Core/Scene.hpp>
 #include <Resources/ResourceManager.hpp>
 #include <Graphics/Camera/KeyboardCamera.hpp>
-#include <Graphics/Primitives/Rectangle.hpp>
+#include <Graphics/RendererRM.hpp>
+#include <Graphics/Blender.hpp>
 
 class TestScene : public Scene{
     public:
@@ -14,9 +15,11 @@ class TestScene : public Scene{
         void onLoop() override;
         void onEnd() override;
 
-    private:        
+    private:
         Object* test;
-        Renderer* renderer;
+        RendererRasterizer* renderer;
+        RendererRM* rendererRM;
         ResourceManager* manager;
-        
+        Camera* camera;
+        Blender* blender;
 };

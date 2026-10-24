@@ -1,22 +1,16 @@
 #pragma once
-#include <Core/Object.hpp>
+#include <Graphics/Shader.hpp>
 #include <Graphics/Camera/Camera.hpp>
-#include <map>
 
 class Renderer{
     public:
-        Renderer(Camera* camera, const Shader* shader);
-        ~Renderer();
+        Renderer(const Shader* shader, const Shader* zShader);
+        virtual ~Renderer() = 0;
 
-        void draw();
-        
-        void addObject(Object* object);
-        void removeObject(std::string ID);
+        virtual void draw(const View& view) const = 0;
+        virtual void zDraw(const View& view) const = 0;
 
-        void print_toRender();
-
-    private:
-        std::map<std::string, Object*> objects;
-        Camera* camera;
+    protected:
         const Shader* shader;
+        const Shader* zShader;
 };

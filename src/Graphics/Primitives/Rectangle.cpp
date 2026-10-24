@@ -20,10 +20,10 @@ std::vector<Vertex> Rectangle::createRectangleVertices(glm::vec2 size){
     glm::vec2 half = size * 0.5f;
     
     const std::vector<Vertex> vertices = {
-        {{-half.x, -half.y, 1.0f}, {0.0f, 0.0f}},
-        {{ half.x, -half.y, 1.0f}, {1.0f, 0.0f}},
-        {{ half.x,  half.y, 1.0f}, {1.0f, 1.0f}},
-        {{-half.x,  half.y, 1.0f}, {0.0f, 1.0f}}
+        {{-half.x, -half.y, 0.0f}, {0.0f, 0.0f}},
+        {{ half.x, -half.y, 0.0f}, {1.0f, 0.0f}},
+        {{ half.x,  half.y, 0.0f}, {1.0f, 1.0f}},
+        {{-half.x,  half.y, 0.0f}, {0.0f, 1.0f}}
     };
     
 
