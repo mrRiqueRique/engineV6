@@ -12,9 +12,8 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     camera = new KeyboardCamera(0.1f, 2.0f, keyboard);
     renderer = new RendererRasterizer(manager->getShader("normalColored"), manager->getShader("zColored"));
         
-    test = new Object("teste", glm::vec3(0.0), glm::mat4(1.0), manager->getMeshes("acklay"));
+    test = new Object("teste", glm::vec3(0.0), glm::mat4(1.0), manager->getMeshes("laat"));
     
-    test->addMesh(manager->getMesh("box"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_10"));
@@ -51,14 +50,17 @@ void TestScene::onStart()
 void TestScene::onLoop()
 {
     camera->update();
-    if(keyboard->getPressed(GLFW_KEY_U))
-        test->translate(glm::vec3(0.0, 0.5, 0.0));
-    if(keyboard->getPressed(GLFW_KEY_J))
-        test->translate(glm::vec3(0.0, -0.5, 0.0));
-    if(keyboard->getPressed(GLFW_KEY_H))
-        test->translate(glm::vec3(-0.5, 0.0, 0.0));
-    if(keyboard->getPressed(GLFW_KEY_K))
-        test->translate(glm::vec3(0.5, -0.0, 0.0));
+    
+    if(keyboard->getPressed(GLFW_KEY_I)){
+        manager->printLoaded();
+    }
+    //     test->translate(glm::vec3(0.0, 0.5, 0.0));
+    // if(keyboard->getPressed(GLFW_KEY_J))
+    //     test->translate(glm::vec3(0.0, -0.5, 0.0));
+    // if(keyboard->getPressed(GLFW_KEY_H))
+    //     test->translate(glm::vec3(-0.5, 0.0, 0.0));
+    // if(keyboard->getPressed(GLFW_KEY_K))
+    //     test->translate(glm::vec3(0.5, -0.0, 0.0));
 
         
     blender->draw(*camera->getView());

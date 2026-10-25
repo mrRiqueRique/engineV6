@@ -1,12 +1,19 @@
 #include <Graphics/Mesh.hpp>
 
 
-Mesh::Mesh(const std::string& ID, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
-    : ID(ID), count(static_cast<GLsizei>(indices.size())), vertices(vertices), indices(indices)
+Mesh::Mesh(
+    const std::string& ID,
+    const std::vector<Vertex>& vertices,
+    const std::vector<unsigned int>& indices,
+    glm::mat4 model,
+    glm::vec3 origin)
+    : ID(ID), count(static_cast<GLsizei>(indices.size())), vertices(vertices), indices(indices), model(model)
 {
     calculatePoints(vertices);
+    glm::vec4 o = glm::vec4(origin, 1.0);
+    origin = glm::vec3((model * o));
+
     initBuffers(vertices, indices);
-    model = glm::mat4(1.0);
 }
 
 Mesh::~Mesh(){

@@ -16,6 +16,7 @@ class ResourceManager{
         void loadMeshes(const std::string& folderPath);
         Mesh* getMesh(const std::string& ID);
         std::map<std::string, Mesh*> getMeshes(const std::string& ID);
+        Mesh* getCopy(const std::string& ID);
         void removeMesh(const std::string& ID);
         void removeMeshes(const std::vector<std::string>& IDs);
 

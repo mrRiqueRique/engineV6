@@ -41,7 +41,7 @@ void main() {
     float dist;
 
     for(int i = 0; i < MAX_STEPS; i++){
-        dist = sphereSDF(ray.position, SPHERE_CENTER, SPHERE_RADIUS);
+        dist = modSphereSDF(ray.position, SPHERE_CENTER, SPHERE_RADIUS);
         if(dist < PRECISION){
             steps = i;
             intersected = true;

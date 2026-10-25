@@ -48,6 +48,16 @@ Mesh* ResourceManager::getMesh(const std::string& ID){
     return it->second;
 }
 
+Mesh* ResourceManager::getCopy(const std::string& ID)
+{
+    auto it = meshes.find(ID);
+
+    if(it == meshes.end())
+        throw std::runtime_error("Mesh " + ID + " not found. Unable to get");
+
+    return new Mesh(*it->second);
+}
+
 std::map<std::string, Mesh*> ResourceManager::getMeshes(const std::string& ID){
     std::map<std::string, Mesh*> allMeshes;
     bool equal = true;

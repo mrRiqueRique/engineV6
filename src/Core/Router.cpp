@@ -1,6 +1,6 @@
 #include <Core/Router.hpp>
 
-Router* Router::router= nullptr;;
+Router* Router::router= nullptr;
 
 Router* Router::GetInstance(std::unordered_map<std::string, Scene*> scenes)
 {

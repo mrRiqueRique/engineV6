@@ -13,7 +13,12 @@ struct Vertex{
 
 class Mesh{
     public:
-        Mesh(const std::string& ID, const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        Mesh(
+            const std::string& ID,
+            const std::vector<Vertex>& vertices,
+            const std::vector<unsigned int>& indices,
+            glm::mat4 model = glm::mat4(1.0f),
+            glm::vec3 origin = glm::vec3(0.0f));
 
         ~Mesh();
 
@@ -24,7 +29,9 @@ class Mesh{
         glm::vec3 getMaxP() const { return maxP; }
         glm::vec3 getMinP() const { return minP; }
         glm::mat4 getModel() const { return model; }
-        
+        const std::vector<Vertex> getVertices() const { return vertices; }
+        const std::vector<unsigned int> getIndices() const { return indices; }
+
     private:
         GLuint VAO, VBO, EBO;
         std::string ID;

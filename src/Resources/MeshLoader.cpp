@@ -8,24 +8,53 @@ std::vector<Mesh*> MeshLoader::loadMesh(std::string filePath){
         if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
             throw std::runtime_error("erro carregando modelo: " + filePath);
         
-        MeshLoader::processNode(scene->mRootNode, scene, meshes, 0, filePath);
+        aiMatrix4x4 identity;
+        MeshLoader::processNode(scene->mRootNode, scene, meshes, identity, 0, filePath);
 
         return meshes;
 }
 
-void MeshLoader::processNode(aiNode *node, const aiScene *scene, std::vector<Mesh*> &meshes, unsigned int nodeIndex, std::string filePath){
+void MeshLoader::processNode(aiNode *node, const aiScene *scene, std::vector<Mesh*> &meshes, const aiMatrix4x4& parentTransform, unsigned int nodeIndex, std::string filePath){
+    aiMatrix4x4 globalTransform = parentTransform * node->mTransformation;
+
     for(unsigned int i = 0; i < node->mNumMeshes; i++){
         unsigned int sceneMeshIndex = node->mMeshes[i];
         aiMesh *mesh = scene->mMeshes[sceneMeshIndex];
-        meshes.push_back(processMesh(mesh, scene, sceneMeshIndex, filePath));
-        
+        meshes.push_back(processMesh(mesh, scene, sceneMeshIndex, globalTransform, filePath));
     }
 
     for(unsigned int i = 0; i < node->mNumChildren; i++)
-        processNode(node->mChildren[i], scene, meshes, i, filePath);            
+        processNode(node->mChildren[i], scene, meshes, globalTransform, i, filePath);            
 }
 
-Mesh* MeshLoader::processMesh(aiMesh *mesh, const aiScene *scene, unsigned int meshIndex, std::string filePath){
+static glm::mat4 toGlm(const aiMatrix4x4& m)
+{
+    glm::mat4 result(1.0f);
+
+    result[0][0] = m.a1;
+    result[1][0] = m.a2;
+    result[2][0] = m.a3;
+    result[3][0] = m.a4;
+
+    result[0][1] = m.b1;
+    result[1][1] = m.b2;
+    result[2][1] = m.b3;
+    result[3][1] = m.b4;
+
+    result[0][2] = m.c1;
+    result[1][2] = m.c2;
+    result[2][2] = m.c3;
+    result[3][2] = m.c4;
+
+    result[0][3] = m.d1;
+    result[1][3] = m.d2;
+    result[2][3] = m.d3;
+    result[3][3] = m.d4;
+
+    return result;
+}
+
+Mesh* MeshLoader::processMesh(aiMesh *mesh, const aiScene *scene, unsigned int meshIndex, const aiMatrix4x4& transform, std::string filePath){
     std::string name = std::filesystem::path(filePath).stem().string() + "_" + std::to_string(meshIndex);
     
     std::vector<Vertex> vertices;
@@ -59,6 +88,6 @@ Mesh* MeshLoader::processMesh(aiMesh *mesh, const aiScene *scene, unsigned int m
             indices.push_back(face.mIndices[j]);
     }
 
-    return new Mesh(name, vertices, indices);
+    return new Mesh(name, vertices, indices, toGlm(transform));
 
 }
