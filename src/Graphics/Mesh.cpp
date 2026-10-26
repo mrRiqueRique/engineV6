@@ -11,7 +11,7 @@ Mesh::Mesh(
 {
     calculatePoints(vertices);
     glm::vec4 o = glm::vec4(origin, 1.0);
-    origin = glm::vec3((model * o));
+    this->origin = glm::vec3((model * o));
 
     initBuffers(vertices, indices);
 }

@@ -4,7 +4,7 @@
 Object::Object(const std::string& ID, glm::vec3 origin, glm::mat4 model, std::map<std::string, Mesh*> meshes)
     : ID(ID), origin(origin), model(model), meshes(meshes)
 {
-
+    texture = nullptr;
 }
 
 Object::~Object()
@@ -16,6 +16,8 @@ void Object::draw(const Shader& shader) const
 {
     for(auto const& [key, mesh] : meshes){
         shader.informMat4("model", mesh->getModel() * model);
+        if(texture)
+            texture->bindAt(shader, "Texture", 0);
         mesh->draw(shader, GL_TRIANGLES);
     }
 }

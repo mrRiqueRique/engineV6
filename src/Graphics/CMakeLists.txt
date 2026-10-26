@@ -8,6 +8,7 @@ target_sources(engine PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Texture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/FrameBuffer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GreedyMesher.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/TextureInspector.cpp
 )
 
 add_subdirectory(Camera)

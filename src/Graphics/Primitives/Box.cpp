@@ -20,41 +20,41 @@ std::vector<Vertex> Box::createBoxVertices(glm::vec3 size)
     glm::vec3 half = size * 0.5f;
 
     const std::vector<Vertex> vertices = {
-        // Back face (-Z)
-        {{-half.x, -half.y, -half.z}, {0.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}},
-        {{ half.x, -half.y, -half.z}, {1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}},
-        {{ half.x,  half.y, -half.z}, {1.0f, 1.0f}, { 0.0f,  0.0f, -1.0f}},
-        {{-half.x,  half.y, -half.z}, {0.0f, 1.0f}, { 0.0f,  0.0f, -1.0f}},
+        // Back face (-Z): column 1, row 3
+        {{-half.x, -half.y, -half.z}, {1.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  0.0f, -1.0f}},
+        {{ half.x, -half.y, -half.z}, {2.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  0.0f, -1.0f}},
+        {{ half.x,  half.y, -half.z}, {2.0f / 3.0f, 2.0f / 4.0f}, { 0.0f,  0.0f, -1.0f}},
+        {{-half.x,  half.y, -half.z}, {1.0f / 3.0f, 2.0f / 4.0f}, { 0.0f,  0.0f, -1.0f}},
 
-        // Front face (+Z)
-        {{-half.x, -half.y,  half.z}, {0.0f, 0.0f}, { 0.0f,  0.0f,  1.0f}},
-        {{ half.x, -half.y,  half.z}, {1.0f, 0.0f}, { 0.0f,  0.0f,  1.0f}},
-        {{ half.x,  half.y,  half.z}, {1.0f, 1.0f}, { 0.0f,  0.0f,  1.0f}},
-        {{-half.x,  half.y,  half.z}, {0.0f, 1.0f}, { 0.0f,  0.0f,  1.0f}},
+        // Front face (+Z): column 1, row 1
+        {{-half.x, -half.y,  half.z}, {1.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  0.0f,  1.0f}},
+        {{ half.x, -half.y,  half.z}, {2.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  0.0f,  1.0f}},
+        {{ half.x,  half.y,  half.z}, {2.0f / 3.0f, 2.0f / 4.0f}, { 0.0f,  0.0f,  1.0f}},
+        {{-half.x,  half.y,  half.z}, {1.0f / 3.0f, 2.0f / 4.0f}, { 0.0f,  0.0f,  1.0f}},
 
-        // Left face (-X)
-        {{-half.x, -half.y, -half.z}, {0.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}},
-        {{-half.x, -half.y,  half.z}, {1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}},
-        {{-half.x,  half.y,  half.z}, {1.0f, 1.0f}, {-1.0f,  0.0f,  0.0f}},
-        {{-half.x,  half.y, -half.z}, {0.0f, 1.0f}, {-1.0f,  0.0f,  0.0f}},
+        // Left face (-X): column 0, row 1
+        {{-half.x, -half.y, -half.z}, {0.0f,       1.0f / 4.0f}, {-1.0f,  0.0f,  0.0f}},
+        {{-half.x, -half.y,  half.z}, {1.0f / 3.0f, 1.0f / 4.0f}, {-1.0f,  0.0f,  0.0f}},
+        {{-half.x,  half.y,  half.z}, {1.0f / 3.0f, 2.0f / 4.0f}, {-1.0f,  0.0f,  0.0f}},
+        {{-half.x,  half.y, -half.z}, {0.0f,       2.0f / 4.0f}, {-1.0f,  0.0f,  0.0f}},
 
-        // Right face (+X)
-        {{ half.x, -half.y, -half.z}, {0.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}},
-        {{ half.x, -half.y,  half.z}, {1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}},
-        {{ half.x,  half.y,  half.z}, {1.0f, 1.0f}, { 1.0f,  0.0f,  0.0f}},
-        {{ half.x,  half.y, -half.z}, {0.0f, 1.0f}, { 1.0f,  0.0f,  0.0f}},
+        // Right face (+X): column 2, row 1
+        {{ half.x, -half.y, -half.z}, {2.0f / 3.0f, 1.0f / 4.0f}, { 1.0f,  0.0f,  0.0f}},
+        {{ half.x, -half.y,  half.z}, {1.0f,       1.0f / 4.0f}, { 1.0f,  0.0f,  0.0f}},
+        {{ half.x,  half.y,  half.z}, {1.0f,       2.0f / 4.0f}, { 1.0f,  0.0f,  0.0f}},
+        {{ half.x,  half.y, -half.z}, {2.0f / 3.0f, 2.0f / 4.0f}, { 1.0f,  0.0f,  0.0f}},
 
-        // Bottom face (-Y)
-        {{-half.x, -half.y, -half.z}, {0.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}},
-        {{ half.x, -half.y, -half.z}, {1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}},
-        {{ half.x, -half.y,  half.z}, {1.0f, 1.0f}, { 0.0f, -1.0f,  0.0f}},
-        {{-half.x, -half.y,  half.z}, {0.0f, 1.0f}, { 0.0f, -1.0f,  0.0f}},
+        // Bottom face (-Y): column 1, row 2
+        {{-half.x, -half.y, -half.z}, {1.0f / 3.0f, 2.0f / 4.0f}, { 0.0f, -1.0f,  0.0f}},
+        {{ half.x, -half.y, -half.z}, {2.0f / 3.0f, 2.0f / 4.0f}, { 0.0f, -1.0f,  0.0f}},
+        {{ half.x, -half.y,  half.z}, {2.0f / 3.0f, 3.0f / 4.0f}, { 0.0f, -1.0f,  0.0f}},
+        {{-half.x, -half.y,  half.z}, {1.0f / 3.0f, 3.0f / 4.0f}, { 0.0f, -1.0f,  0.0f}},
 
-        // Top face (+Y)
-        {{-half.x,  half.y, -half.z}, {0.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}},
-        {{ half.x,  half.y, -half.z}, {1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}},
-        {{ half.x,  half.y,  half.z}, {1.0f, 1.0f}, { 0.0f,  1.0f,  0.0f}},
-        {{-half.x,  half.y,  half.z}, {0.0f, 1.0f}, { 0.0f,  1.0f,  0.0f}}
+        // Top face (+Y): column 1, row 0
+        {{-half.x,  half.y, -half.z}, {1.0f / 3.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}},
+        {{ half.x,  half.y, -half.z}, {2.0f / 3.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}},
+        {{ half.x,  half.y,  half.z}, {2.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  1.0f,  0.0f}},
+        {{-half.x,  half.y,  half.z}, {1.0f / 3.0f, 1.0f / 4.0f}, { 0.0f,  1.0f,  0.0f}}
     };
 
     return vertices;

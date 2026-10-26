@@ -6,6 +6,7 @@
 #include <Graphics/RendererRM.hpp>
 #include <Graphics/Blender.hpp>
 #include <Graphics/Primitives/Box.hpp>
+#include <Graphics/TextureInspector.hpp>
 
 class TestScene : public Scene{
     public:
@@ -20,6 +21,7 @@ class TestScene : public Scene{
         Object* test;
         RendererRasterizer* renderer;
         RendererRM* rendererRM;
+        TextureInspector* inspector;
         ResourceManager* manager;
         Camera* camera;
         Blender* blender;

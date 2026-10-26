@@ -1,5 +1,6 @@
 #pragma once
 #include <Graphics/Mesh.hpp>
+#include <Graphics/Texture.hpp>
 #include <map>
 
 class Object{
@@ -21,6 +22,8 @@ class Object{
         void resize(glm::vec3 size);
         void rotate(glm::vec3 rotation);
 
+        void setTexture(Texture* newTexture) { texture = newTexture; }
+
         void printInformation();
         std::string getID() const { return ID; }
         glm::vec3 getPosition() const { return origin; };
@@ -32,4 +35,5 @@ class Object{
         glm::mat4 model;
         
         std::map<std::string, Mesh*> meshes;
+        Texture* texture;
 };
