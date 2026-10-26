@@ -40,11 +40,11 @@ void Blender::draw(const View& view)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer1->zDraw(view);
 
+    glViewport(0, 0, resolution.x, resolution.y);
 
     renderer2frameBuffer1->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer2->draw(view);
-
 
     renderer2frameBuffer2->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

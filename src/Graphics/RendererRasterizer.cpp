@@ -1,7 +1,7 @@
 #include <Graphics/RendererRasterizer.hpp>
 
-RendererRasterizer::RendererRasterizer(const Shader* shader, const Shader* zShader)
-    : Renderer(shader, zShader)
+RendererRasterizer::RendererRasterizer(const Shader* shader, const Shader* zShader, glm::vec2 position, glm::vec2 size)
+    : Renderer(shader, zShader, position, size)
 {
     
 }
@@ -11,7 +11,7 @@ RendererRasterizer::~RendererRasterizer()
 
 }
 
-void RendererRasterizer::draw(const View& view) const
+void RendererRasterizer::Draw(const View& view) const
 {
     shader->activate();
     view.informShader(*shader);
@@ -20,7 +20,7 @@ void RendererRasterizer::draw(const View& view) const
         object->draw(*shader);
 }
 
-void RendererRasterizer::zDraw(const View& view) const
+void RendererRasterizer::ZDraw(const View& view) const
 {
     zShader->activate();
     view.informShader(*zShader);

@@ -10,7 +10,8 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     manager->loadMesh(new Box("box", glm::vec3(1.0, 1.0, 1.0)));
 
     camera = new KeyboardCamera(0.1f, 2.0f, keyboard);
-    renderer = new RendererRasterizer(manager->getShader("normalColored"), manager->getShader("zColored"));
+    glm::vec2 resolution = glm::vec2(window->getWidth(), window->getHeight());
+    renderer = new RendererRasterizer(manager->getShader("normalColored"), manager->getShader("zColored"), glm::vec2(0, 0), resolution);
         
     test = new Object("teste", glm::vec3(0.0), glm::mat4(1.0), manager->getMeshes("laat"));
     
@@ -20,13 +21,12 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     
     renderer->addObject(test);
     
-    glm::vec2 resolution = glm::vec2(window->getWidth(), window->getHeight());
 
     rendererRM = new RendererRM(
         manager->getShader("rmNormalColored"),
         manager->getShader("rmZColored"),
-        resolution,
-        manager->getMesh("rect_mesh")
+        manager->getMesh("rect_mesh"),
+        glm::vec2(0, 0), resolution
     );
 
     blender = new Blender(rendererRM, renderer, manager->getShader("blender"), resolution, manager->getMesh("rect_mesh"));

@@ -5,14 +5,13 @@
 
 class RendererRM : public Renderer{
     public:
-        RendererRM(const Shader* shader, const Shader* zShader, glm::vec2 resolution, Mesh* Rectangle);
+        RendererRM(const Shader* shader, const Shader* zShader, Mesh* Rectangle, glm::vec2 position, glm::vec2 size);
         ~RendererRM();
 
-        void draw(const View& view) const override;
-        void zDraw(const View& view) const override;
+        void Draw(const View& view) const override;
+        void ZDraw(const View& view) const override;
 
     private:
         glm::mat4 ortho;
         Object* screen;
-        glm::vec2 resolution;
 };
