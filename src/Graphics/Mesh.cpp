@@ -4,15 +4,26 @@
 Mesh::Mesh(
     const std::string& ID,
     const std::vector<Vertex>& vertices,
-    const std::vector<unsigned int>& indices,
-    glm::mat4 model,
-    glm::vec3 origin)
-    : ID(ID), count(static_cast<GLsizei>(indices.size())), vertices(vertices), indices(indices), model(model)
+    const std::vector<unsigned int>& indices)
+    : Movable3D(), ID(ID), count(static_cast<GLsizei>(indices.size())),
+      vertices(vertices), indices(indices), isCopy(false)
 {
-    calculatePoints(vertices);
-    glm::vec4 o = glm::vec4(origin, 1.0);
-    this->origin = glm::vec3((model * o));
+    glm::vec3 center = calculatePoints(vertices);  // fills maxP/minP, returns centroid
+    glm::vec3 s = calculateScale();                // now reads valid maxP/minP
 
+    resizeTo(s);
+    goTo(-center * s);
+
+    initBuffers(vertices, indices);
+}
+
+Mesh::Mesh(const std::string& ID,
+            const std::vector<Vertex>& vertices,
+            const std::vector<unsigned int>& indices,
+            glm::mat4 model)
+    : Movable3D(model), ID(ID), count(static_cast<GLsizei>(indices.size())),
+      vertices(vertices), indices(indices), isCopy(false)
+{
     initBuffers(vertices, indices);
 }
 
@@ -27,6 +38,14 @@ void Mesh::draw(const Shader& shader, GLenum mode) const{
     glBindVertexArray(VAO);
     glDrawElements(mode, count, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+glm::vec3 Mesh::calculateScale()
+{
+    glm::vec3 size = maxP - minP;
+    float longest = glm::max(size.x, glm::max(size.y, size.z));
+    if (longest <= 0.0f) return glm::vec3(1.0f);
+    return glm::vec3(1.0f / longest);
 }
 
 void Mesh::initBuffers(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
@@ -59,7 +78,7 @@ void Mesh::initBuffers(const std::vector<Vertex>& vertices, const std::vector<un
     glBindVertexArray(0);
 }
 
-void Mesh::calculatePoints(const std::vector<Vertex>& vertices){
+glm::vec3 Mesh::calculatePoints(const std::vector<Vertex>& vertices){
     glm::vec3 soma(0.0f);
     float n = static_cast<float>(vertices.size());
     
@@ -87,5 +106,5 @@ void Mesh::calculatePoints(const std::vector<Vertex>& vertices){
         if(v.position.z < minP.z)
             minP.z = v.position.z;
     }
-    origin = soma/n;
+    return soma/n;
 }

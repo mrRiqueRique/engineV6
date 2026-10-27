@@ -61,6 +61,7 @@ add_subdirectory(src/IO)
 add_subdirectory(src/Core)
 add_subdirectory(src/Graphics)
 add_subdirectory(src/Resources)
+add_subdirectory(src/Utility)
 
 add_executable(demo src/main.cpp)
 

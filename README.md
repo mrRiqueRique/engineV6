@@ -18,16 +18,26 @@ sudo apt install libassimp-dev
 #### &nbsp;&nbsp;&nbsp;&nbsp; 1. Rasterizing
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Texture
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. UV unwrapping
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. UV visualizer
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. UV visualizer ✅
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Paint on mesh
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [UV concepts](https://www.youtube.com/watch?v=gyAUPl_PMRQ)
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Lighting
 #### &nbsp;&nbsp;&nbsp;&nbsp; 2. Ray Marching
 #### &nbsp;&nbsp;&nbsp;&nbsp; 3. Real time shader editing
-#### &nbsp;&nbsp;&nbsp;&nbsp; 4. Blending
+#### &nbsp;&nbsp;&nbsp;&nbsp; 4. Blending ✅
 ### 3. Physics
 #### &nbsp;&nbsp;&nbsp;&nbsp; 1. Mesh Axis Aligned Bounding Box
 #### &nbsp;&nbsp;&nbsp;&nbsp; 2. Bounding Volume Hierarchie
 ### 4. Abstraction
 #### &nbsp;&nbsp;&nbsp;&nbsp; 1. Gizmos
 #### &nbsp;&nbsp;&nbsp;&nbsp; 2. Load Objects
+### 5. Animation
+#### [Animation tutorial](https://www.youtube.com/watch?v=f3Cr8Yx3GGA)
+#### &nbsp;&nbsp;&nbsp;&nbsp; 1. Bone creation
+#### &nbsp;&nbsp;&nbsp;&nbsp; 2. Vertex Group assignment
+#### &nbsp;&nbsp;&nbsp;&nbsp; 3. Weight based transformation
+#### &nbsp;&nbsp;&nbsp;&nbsp; 4. Keyframe animation
+#### &nbsp;&nbsp;&nbsp;&nbsp; 5. Interpolation
+#### &nbsp;&nbsp;&nbsp;&nbsp; 6. Inverse Kinematics
+#### &nbsp;&nbsp;&nbsp;&nbsp; 7. Physics collision interference
+#### &nbsp;&nbsp;&nbsp;&nbsp; 8. Presets

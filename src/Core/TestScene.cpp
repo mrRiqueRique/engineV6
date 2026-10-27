@@ -14,8 +14,13 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
     glm::vec2 resolution = glm::vec2(window->getWidth(), window->getHeight());
     renderer = new RendererRasterizer(manager->getShader("textured"), manager->getShader("zColored"), glm::vec2(0, 0), resolution);
         
-    test = new Object("teste", glm::vec3(0.0), glm::mat4(1.0), manager->getMeshes("box"));
-    test->setTexture(manager->getTexture("onca"));
+    test = new Object(
+        "teste",
+        glm::vec3(0.0), glm::vec3(1.0), glm::vec3(0.0),
+        glm::mat3(1.0),
+        manager->getMeshes("box"));
+    test->setAllTextures(manager->getTexture("image"));
+    // test->setTexture(manager->getTexture("image"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_10"));
@@ -29,21 +34,21 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
         glm::vec2(0, 0), resolution
     );
 
-    blender = new Blender(rendererRM, renderer, manager->getShader("blender"), resolution, manager->getMesh("rect_mesh"));
+    blender = new Blender(rendererRM, renderer, manager->getShader("blender"), glm::vec2(0.0f), resolution, manager->getMesh("rect_mesh"));
 
     inspector = new TextureInspector(
         manager->getShader("uv"),
         manager->getShader("orthoTextured"),
         manager->getMesh("rect_mesh"),
-        manager->getTexture("onca"),
-        manager->getMesh("box"),
+        manager->getTexture("image"),
+        test,
         glm::vec2(0.0, 0.0), glm::vec2(800.0, 800.0)
     );
 }
 
 TestScene::~TestScene()
 {
-    delete test;
+    // delete test;
     delete manager;
     delete renderer;
     delete rendererRM;

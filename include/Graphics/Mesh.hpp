@@ -1,6 +1,6 @@
 #pragma once
 #include <glad/gl.h>
-#include <glm/glm.hpp>
+#include <Utility/Movable3D.hpp>
 #include <string>
 #include <vector>
 #include <Graphics/Shader.hpp>
@@ -11,26 +11,34 @@ struct Vertex{
     glm::vec3 normal;
 };
 
-class Mesh{
+class Mesh : public Movable3D {
     public:
         Mesh(
             const std::string& ID,
             const std::vector<Vertex>& vertices,
+            const std::vector<unsigned int>& indices
+        );
+
+        Mesh(
+            const std::string& ID,
+            const std::vector<Vertex>& vertices,
             const std::vector<unsigned int>& indices,
-            glm::mat4 model = glm::mat4(1.0f),
-            glm::vec3 origin = glm::vec3(0.0f));
+            glm::mat4 model
+        );
+
 
         ~Mesh();
 
         void draw(const Shader& shader, GLenum mode) const;
         
         std::string getID() const { return ID; }
-        glm::vec3 getOrigin() const { return origin; }
         glm::vec3 getMaxP() const { return maxP; }
         glm::vec3 getMinP() const { return minP; }
-        glm::mat4 getModel() const { return model; }
         const std::vector<Vertex> getVertices() const { return vertices; }
         const std::vector<unsigned int> getIndices() const { return indices; }
+
+        bool isCopy;
+        void setIsCopy() { isCopy = !isCopy; }
 
     private:
         GLuint VAO, VBO, EBO;
@@ -39,12 +47,11 @@ class Mesh{
         const std::vector<Vertex> vertices;
         const std::vector<unsigned int> indices;
 
-        glm::vec3 origin;
         glm::vec3 maxP, minP;
         GLsizei count;
 
-        glm::mat4 model;
+        glm::vec3 calculateScale();
+        glm::vec3 calculatePoints(const std::vector<Vertex>& vertices);
 
         void initBuffers(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
-        void calculatePoints(const std::vector<Vertex>& vertices);
 };

@@ -17,7 +17,7 @@ void RendererRasterizer::Draw(const View& view) const
     view.informShader(*shader);
     shader->informVec3("cameraPosition", view.getPosition());
     for(const auto& [key, object] : objects)
-        object->draw(*shader);
+        object->draw(*shader, GL_TRIANGLES);
 }
 
 void RendererRasterizer::ZDraw(const View& view) const
@@ -27,7 +27,7 @@ void RendererRasterizer::ZDraw(const View& view) const
     zShader->informVec3("cameraPosition", view.getPosition());
     zShader->informFloat("zFar", view.getZFar());
     for(const auto& [key, object] : objects)
-        object->draw(*zShader);
+        object->draw(*zShader, GL_TRIANGLES);
 }
 
 void RendererRasterizer::addObject(Object* object)

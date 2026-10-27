@@ -5,7 +5,10 @@ GreedyMesher* GreedyMesher::greedyMesher = nullptr;
 
 GreedyMesher* GreedyMesher::GetInstance()
 {
-    
+    if(greedyMesher==nullptr){
+        greedyMesher = new GreedyMesher();
+    }
+    return greedyMesher;
 }
 
 Mesh* GreedyMesher::joinMeshes(const std::map<std::string, Mesh*> meshes, const std::string& name)

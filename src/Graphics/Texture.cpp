@@ -1,8 +1,6 @@
 #include <Graphics/Texture.hpp>
 
 Texture::Texture(const std::string& filePath, const std::string& name) : name(name){
-    offset = glm::vec2(0.0);
-
     int width, height, nrChannels;
     glGenTextures(1, &ID);
     glBindTexture(GL_TEXTURE_2D, ID);
@@ -41,8 +39,6 @@ Texture::Texture(const std::string& filePath, const std::string& name) : name(na
 Texture::Texture(int width, int height, const std::string& name) 
     : width(width), height(height), name(name)
 {
-    offset = glm::vec2(0.0);
-
     glGenTextures(1, &ID);
     glBindTexture(GL_TEXTURE_2D, ID);
 
@@ -71,7 +67,6 @@ void Texture::bindAt(const Shader& shader, const std::string& loc, unsigned int 
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, ID);
     shader.informInt(loc.c_str(), unit);
-    shader.informVec2("offset", offset);
 }
 
 void Texture::copyPixelData(const Texture& texture)

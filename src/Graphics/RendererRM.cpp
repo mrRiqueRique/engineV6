@@ -5,7 +5,7 @@ RendererRM::RendererRM(const Shader* shader, const Shader* zShader, Mesh* Rectan
 {
     screen->addMesh(Rectangle);
     screen->translate(glm::vec3(-0.5, -0.5, 0.0));
-    screen->resize(glm::vec3(size, 1.0f));
+    screen->resize(glm::vec3(size, 1.0f), screen->getPosition());
     ortho = glm::ortho(0.0f, size.x, size.y, 0.0f);
 }
 
@@ -23,7 +23,7 @@ void RendererRM::Draw(const View& view) const
     shader->informVec3("cameraPosition", view.getPosition());
     shader->informVec2("resolution", size);
     shader->informFloat("maxDistance", view.getZFar());
-    screen->draw(*shader);
+    screen->draw(*shader, GL_TRIANGLES);
 }
 
 void RendererRM::ZDraw(const View& view) const
@@ -35,5 +35,5 @@ void RendererRM::ZDraw(const View& view) const
     zShader->informVec3("cameraPosition", view.getPosition());
     zShader->informVec2("resolution", size);
     zShader->informFloat("maxDistance", view.getZFar());
-    screen->draw(*zShader);
+    screen->draw(*zShader, GL_TRIANGLES);
 }

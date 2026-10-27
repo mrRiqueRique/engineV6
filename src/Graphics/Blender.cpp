@@ -3,21 +3,21 @@
 
 Blender::Blender(const Renderer* renderer1, const Renderer* renderer2,
     const Shader* blendingShader,
-    glm::vec2 resolution, Mesh* Rectangle
+    glm::vec2 position, glm::vec2 size, Mesh* Rectangle
 )
-    : renderer1(renderer1), renderer2(renderer2), blendingShader(blendingShader), resolution(resolution)
+    : Renderer(blendingShader, blendingShader, position, size), renderer1(renderer1), renderer2(renderer2), blendingShader(blendingShader)
 {
     screen = new Object("screen");
 
-    renderer1frameBuffer1 = new FrameBuffer(resolution.x, resolution.y);
-    renderer1frameBuffer2 = new FrameBuffer(resolution.x, resolution.y);
-    renderer2frameBuffer1 = new FrameBuffer(resolution.x, resolution.y);
-    renderer2frameBuffer2 = new FrameBuffer(resolution.x, resolution.y);
+    renderer1frameBuffer1 = new FrameBuffer(size.x, size.y);
+    renderer1frameBuffer2 = new FrameBuffer(size.x, size.y);
+    renderer2frameBuffer1 = new FrameBuffer(size.x, size.y);
+    renderer2frameBuffer2 = new FrameBuffer(size.x, size.y);
 
     screen->addMesh(Rectangle);
     screen->translate(glm::vec3(-0.5, 0.5, 1.0));
-    screen->resize(glm::vec3(resolution.x, resolution.y, 1.0f));
-    ortho = glm::ortho(0.0f, resolution.x, -resolution.y, 0.0f);
+    screen->resize(glm::vec3(size.x, size.y, 1.0f), screen->getPosition());
+    ortho = glm::ortho(0.0f, size.x, -size.y, 0.0f);
 }
 
 Blender::~Blender()
@@ -28,7 +28,7 @@ Blender::~Blender()
     delete renderer2frameBuffer2;
 }
 
-void Blender::draw(const View& view)
+void Blender::Draw(const View& view) const
 {
     glClearColor(0, 0, 0, 1);
 
@@ -40,7 +40,7 @@ void Blender::draw(const View& view)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer1->zDraw(view);
 
-    glViewport(0, 0, resolution.x, resolution.y);
+    glViewport(0, 0, size.x, size.y);
 
     renderer2frameBuffer1->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -60,5 +60,40 @@ void Blender::draw(const View& view)
     renderer2frameBuffer2->getFrame()->bindAt(*blendingShader, "texture4", 3);
 
     blendingShader->informMat4("ortho", ortho);
-    screen->draw(*blendingShader);
+    screen->draw(*blendingShader, GL_TRIANGLES);
+}
+
+void Blender::ZDraw(const View& view) const
+{
+    glClearColor(0, 0, 0, 1);
+
+    renderer1frameBuffer1->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer1->zDraw(view);
+
+    renderer1frameBuffer2->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer1->zDraw(view);
+
+    glViewport(0, 0, size.x, size.y);
+
+    renderer2frameBuffer1->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer2->zDraw(view);
+
+    renderer2frameBuffer2->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderer2->zDraw(view);
+
+    renderer2frameBuffer2->unbind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    blendingShader->activate();
+    renderer1frameBuffer1->getFrame()->bindAt(*blendingShader, "texture1", 0);
+    renderer1frameBuffer2->getFrame()->bindAt(*blendingShader, "texture2", 1);
+    renderer2frameBuffer1->getFrame()->bindAt(*blendingShader, "texture3", 2);
+    renderer2frameBuffer2->getFrame()->bindAt(*blendingShader, "texture4", 3);
+
+    blendingShader->informMat4("ortho", ortho);
+    screen->draw(*blendingShader, GL_TRIANGLES);
 }

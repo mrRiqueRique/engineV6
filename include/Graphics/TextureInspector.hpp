@@ -5,18 +5,18 @@
 
 class TextureInspector : public Renderer{
     public:
-        TextureInspector(const Shader* shader, const Shader* zShader, Mesh* Rectangle, Texture* texture, Mesh* mesh, glm::vec2 position, glm::vec2 size);
+        TextureInspector(const Shader* shader, const Shader* zShader, Mesh* Rectangle, Texture* texture, Object* object, glm::vec2 position, glm::vec2 size);
         ~TextureInspector();
 
         void Draw(const View& view) const override;
         void ZDraw(const View& view) const override {}
 
         void setCurrentTexture(Texture* newTexture) { currentTexture = newTexture; }
-        void setCurrentMesh(Mesh* newMesh) { currentMesh = newMesh; }
+        void setCurrentObject(Object* newObject) { currentObject = newObject; }
 
     private:
         Texture* currentTexture;
-        Mesh* currentMesh;
+        Object* currentObject;
         Object* screen;
         glm::mat4 orthoScreen;
         glm::mat4 orthoUV;

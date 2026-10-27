@@ -25,5 +25,4 @@ class Texture{
         GLuint ID;
         int width, height;
         std::string name;
-        glm::vec2 offset;
 };

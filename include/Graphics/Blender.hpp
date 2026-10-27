@@ -3,15 +3,16 @@
 #include <Graphics/Renderer.hpp>
 #include <Core/Object.hpp>
 
-class Blender{
+class Blender : public Renderer{
     public:
         Blender(const Renderer* renderer1, const Renderer* renderer2,
             const Shader* blendingShader,
-            glm::vec2 resolution, Mesh* Rectangle
+            glm::vec2 position, glm::vec2 size, Mesh* Rectangle
         );
         ~Blender();
 
-        void draw(const View& view);
+        void Draw(const View& view) const override;
+        void ZDraw(const View& view) const override;
 
     private:
         const Renderer* renderer1;
@@ -21,8 +22,6 @@ class Blender{
 
         Object* screen;
         glm::mat4 ortho;
-
-        glm::vec2 resolution;
 
         FrameBuffer* renderer1frameBuffer1;
         FrameBuffer* renderer1frameBuffer2;
