@@ -5,7 +5,7 @@ Object::Object(
             glm::vec3 origin,
             glm::vec3 scale,
             glm::vec3 rotation,
-            glm::mat3 uvModel,
+            Movable2D uvModel,
             std::map<std::string, Mesh*> meshes,
             std::map<std::string, Texture*> textures,
             std::map<std::string, Movable3D> meshModels,
@@ -37,7 +37,7 @@ void Object::draw(const Shader& shader, GLenum mode) const
         auto it = textures.find(key);
         if(it != textures.end()){
             textures.at(key)->bindAt(shader, "Texture", 0);
-            shader.informMat3("uvModel", uvModel * uvModels.at(key).getModel());
+            shader.informMat3("uvModel", uvModel.getModel() * uvModels.at(key).getModel());
         }
 
         mesh->draw(shader, mode);

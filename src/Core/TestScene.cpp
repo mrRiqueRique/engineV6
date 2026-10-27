@@ -18,8 +18,8 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
         "teste",
         glm::vec3(0.0), glm::vec3(1.0), glm::vec3(0.0),
         glm::mat3(1.0),
-        manager->getMeshes("box"));
-    test->setAllTextures(manager->getTexture("image"));
+        manager->getMeshes("acklay"));
+    test->setAllTextures(manager->getTexture("grad"));
     // test->setTexture(manager->getTexture("image"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
@@ -40,9 +40,9 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
         manager->getShader("uv"),
         manager->getShader("orthoTextured"),
         manager->getMesh("rect_mesh"),
-        manager->getTexture("image"),
+        manager->getTexture("grad"),
         test,
-        glm::vec2(0.0, 0.0), glm::vec2(800.0, 800.0)
+        glm::vec2(0.0, 0.0), glm::vec2(manager->getTexture("grad")->getWidth(), manager->getTexture("grad")->getHeight()) 
     );
 }
 
@@ -66,16 +66,19 @@ void TestScene::onLoop()
 {
     camera->update();
     
-    if(keyboard->getPressed(GLFW_KEY_I)){
-        manager->printLoaded();
-    }
-    //     test->translate(glm::vec3(0.0, 0.5, 0.0));
-    // if(keyboard->getPressed(GLFW_KEY_J))
-    //     test->translate(glm::vec3(0.0, -0.5, 0.0));
-    // if(keyboard->getPressed(GLFW_KEY_H))
-    //     test->translate(glm::vec3(-0.5, 0.0, 0.0));
-    // if(keyboard->getPressed(GLFW_KEY_K))
-    //     test->translate(glm::vec3(0.5, -0.0, 0.0));
+    // if(keyboard->getPressed(GLFW_KEY_I)){
+    //     manager->printLoaded();
+    // }
+
+    const float T_VEL = 0.01;
+    if(keyboard->getHold(GLFW_KEY_U))
+        test->translateAllUVs(glm::vec3(0.0, -T_VEL, 0.0));
+    if(keyboard->getHold(GLFW_KEY_J))
+        test->translateAllUVs(glm::vec3(0.0, T_VEL, 0.0));
+    if(keyboard->getHold(GLFW_KEY_H))
+        test->translateAllUVs(glm::vec3(-T_VEL, 0.0, 0.0));
+    if(keyboard->getHold(GLFW_KEY_K))
+        test->translateAllUVs(glm::vec3(T_VEL, -0.0, 0.0));
 
     // blender->draw(*camera->getView());
     renderer->draw(*camera->getView());

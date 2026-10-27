@@ -11,7 +11,7 @@ class Object : public Movable3D {
             glm::vec3 origin = glm::vec3(0.0),
             glm::vec3 scale = glm::vec3(1.0),
             glm::vec3 rotation = glm::vec3(0.0),
-            glm::mat3 uvModel = glm::mat3(1.0),
+            Movable2D uvModel = Movable2D(),
             std::map<std::string, Mesh*> meshes = {},
             std::map<std::string, Texture*> textures = {},
             std::map<std::string, Movable3D> meshModels = {},
@@ -48,13 +48,21 @@ class Object : public Movable3D {
         void resizeUV(glm::vec2 size, glm::vec2 origin, std::string uvKey);
         void rotateUV(float rotation, glm::vec2 origin, std::string uvKey);
 
+        void goAllUVsTo(glm::vec2 newPosition) { uvModel.goTo(newPosition); }
+        void resizeAllUVsTo(glm::vec2 newSize) { uvModel.resizeTo(newSize); }
+        void rotateAllUVsTo(float newRotation) { uvModel.rotateTo(newRotation); }
+
+        void translateAllUVs(glm::vec2 translation) { uvModel.translate(translation); }
+        void resizeAllUVs(glm::vec2 size, glm::vec2 origin) { uvModel.resize(size, origin); }
+        void rotateAllUVs(float rotation, glm::vec2 origin) { uvModel.rotate(rotation, origin); }
+
         void printInformation();
         std::string getID() const { return ID; }
 
     private:
         std::string ID;
 
-        glm::mat3 uvModel;
+        Movable2D uvModel;
 
         std::map<std::string, Movable3D> meshModels;
         std::map<std::string, Movable2D> uvModels;
