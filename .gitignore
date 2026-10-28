@@ -20,6 +20,7 @@ CMakeUserPresets.json
 
 build/
 assets/models/
+assets/images/
 
 .vscode/
 .vs/

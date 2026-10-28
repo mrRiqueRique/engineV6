@@ -31,7 +31,6 @@ Core::Core(){
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    glViewport(0, 0, window->getWidth(), window->getHeight());
 
     CursorParams cParams = {
         .window = window->getHandle(),

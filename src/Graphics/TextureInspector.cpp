@@ -17,6 +17,7 @@ TextureInspector::~TextureInspector()
 
 void TextureInspector::Draw(const View& view) const 
 {
+    glDisable(GL_DEPTH_TEST);
     zShader->activate();
     currentTexture->bindAt(*zShader, "Texture", 0);
     zShader->informMat4("ortho", orthoScreen);
@@ -31,4 +32,5 @@ void TextureInspector::Draw(const View& view) const
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glLineWidth(1.0);
     glPointSize(1.0);
+    glEnable(GL_DEPTH_TEST);
 }

@@ -55,7 +55,9 @@ Mesh* ResourceManager::getCopy(const std::string& ID)
     if(it == meshes.end())
         throw std::runtime_error("Mesh " + ID + " not found. Unable to get");
 
-    return new Mesh(*it->second);
+    Mesh* mesh = new Mesh(*it->second);
+    mesh->setIsCopy();
+    return mesh;
 }
 
 std::map<std::string, Mesh*> ResourceManager::getMeshes(const std::string& ID){

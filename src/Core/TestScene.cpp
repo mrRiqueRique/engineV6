@@ -19,7 +19,7 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
         glm::vec3(0.0), glm::vec3(1.0), glm::vec3(0.0),
         glm::mat3(1.0),
         manager->getMeshes("acklay"));
-    test->setAllTextures(manager->getTexture("grad"));
+    test->setAllTextures(manager->getTexture("image"));
     // test->setTexture(manager->getTexture("image"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_0"));
     // test->addMesh(manager->getMesh("imerpialcomputerpack1_1"));
@@ -40,15 +40,15 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
         manager->getShader("uv"),
         manager->getShader("orthoTextured"),
         manager->getMesh("rect_mesh"),
-        manager->getTexture("grad"),
+        manager->getTexture("image"),
         test,
-        glm::vec2(0.0, 0.0), glm::vec2(manager->getTexture("grad")->getWidth(), manager->getTexture("grad")->getHeight()) 
+        glm::vec2(0.0, 0.0), glm::vec2(800.0, 800.0) 
     );
 }
 
 TestScene::~TestScene()
 {
-    // delete test;
+    delete test;
     delete manager;
     delete renderer;
     delete rendererRM;
@@ -66,11 +66,13 @@ void TestScene::onLoop()
 {
     camera->update();
     
-    // if(keyboard->getPressed(GLFW_KEY_I)){
-    //     manager->printLoaded();
-    // }
+    if(keyboard->getPressed(GLFW_KEY_R)){
+        manager->printLoaded();
+    }
 
     const float T_VEL = 0.01;
+    const float R_VEL = 0.01;
+
     if(keyboard->getHold(GLFW_KEY_U))
         test->translateAllUVs(glm::vec3(0.0, -T_VEL, 0.0));
     if(keyboard->getHold(GLFW_KEY_J))
@@ -80,8 +82,13 @@ void TestScene::onLoop()
     if(keyboard->getHold(GLFW_KEY_K))
         test->translateAllUVs(glm::vec3(T_VEL, -0.0, 0.0));
 
-    // blender->draw(*camera->getView());
-    renderer->draw(*camera->getView());
+    if(keyboard->getHold(GLFW_KEY_Y))
+        test->rotateAllUVs(R_VEL, glm::vec3(0.0));
+    if(keyboard->getHold(GLFW_KEY_I))
+        test->rotateAllUVs(-R_VEL, glm::vec3(0.0));
+
+    blender->draw(*camera->getView());
+    // renderer->draw(*camera->getView());
     inspector->draw(*camera->getView());
     // rendererRM->draw(*camera->getView());
 }

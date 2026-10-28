@@ -1,12 +1,10 @@
 #include <Graphics/RendererRM.hpp>
 
 RendererRM::RendererRM(const Shader* shader, const Shader* zShader, Mesh* Rectangle, glm::vec2 position, glm::vec2 size)
-    : Renderer(shader, zShader, position, size), screen(new Object("screen"))
+    : Renderer(shader, zShader, position, size), screen(new Object("screen", glm::vec3(size.x * 0.5f, size.y * 0.5f, 0.0f), glm::vec3(size.x, size.y, 1.0f), glm::vec3(0.0f)))
 {
     screen->addMesh(Rectangle);
-    screen->translate(glm::vec3(-0.5, -0.5, 0.0));
-    screen->resize(glm::vec3(size, 1.0f), screen->getPosition());
-    ortho = glm::ortho(0.0f, size.x, size.y, 0.0f);
+    ortho = ortho = glm::ortho(0.0f, size.x, 0.0f, size.y);
 }
 
 RendererRM::~RendererRM()
