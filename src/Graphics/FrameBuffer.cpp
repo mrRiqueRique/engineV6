@@ -34,3 +34,11 @@ FrameBuffer::~FrameBuffer()
     glDeleteRenderbuffers(1, &depthRBO);
     glDeleteFramebuffers(1, &ID);
 }
+
+void FrameBuffer::clear()
+{
+    bind();
+    glClearColor(0.f, 0.f, 0.f, 0.f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    unbind();
+}

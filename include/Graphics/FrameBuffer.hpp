@@ -11,7 +11,7 @@ class FrameBuffer{
 
         void bind(){ glBindFramebuffer(GL_FRAMEBUFFER, ID); }
         void unbind(){ glBindFramebuffer(GL_FRAMEBUFFER, 0); }
-        void clear(){ shaderOutput->clear(); }
+        void clear();
 
     private:
         GLuint ID;

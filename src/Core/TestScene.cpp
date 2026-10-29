@@ -12,7 +12,7 @@ TestScene::TestScene(const Cursor* cursor, const Keyboard* keyboard, const Windo
 
     camera = new KeyboardCamera(0.1f, 2.0f, keyboard);
     glm::vec2 resolution = glm::vec2(window->getWidth(), window->getHeight());
-    renderer = new RendererRasterizer(manager->getShader("textured"), manager->getShader("zColored"), glm::vec2(0, 0), resolution);
+    renderer = new RendererRasterizer(manager->getShader("blinnphongTextured"), manager->getShader("zColored"), glm::vec2(0, 0), resolution);
         
     test = new Object(
         "teste",

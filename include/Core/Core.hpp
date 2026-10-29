@@ -4,6 +4,7 @@
 #include <IO/Keyboard.hpp>
 #include <Core/Router.hpp>
 #include <Core/TestScene.hpp>
+#include <Core/ICScene.hpp>
 
 class Core{
     public:

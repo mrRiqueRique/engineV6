@@ -60,8 +60,10 @@ int Core::onStart(){
     int y = window->getHeight();
 
     scenes["test"] = new TestScene(cursor, keyboard, window);
+    scenes["ic"] = new ICScene(cursor, keyboard, window);
+
     Router::GetInstance(scenes);
-    Router::GetInstance()->setCurrentScene("test");
+    Router::GetInstance()->setCurrentScene("ic");
 
     return 1;
 }
